@@ -8,6 +8,13 @@
         <script src="{{ url_for('static', filename='scripts/stw.js') }}"></script>
         <link rel="stylesheet" href="{{ url_for('static', filename='style/stw.css') }}">
         <title>Spin The Wheel</title>
+        <style>
+            #landing {
+                background: url("{{ url_for('static', filename='images/spin-gb.jpeg') }}");
+                background-repeat: no-repeat;
+                background-size: 100% 100%;
+            }
+        </style>
     </head>
     <body id="{{ page_id }}">
         {% block body %}{% endblock %}

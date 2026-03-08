@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, request, session
+from flask import Flask, render_template, redirect, request, session, jsonify
 from flask_session import Session
 from datetime import timedelta
 
@@ -10,10 +10,17 @@ Session(app)
 
 @app.route("/", methods=["GET", "POST"])
 def index():
-    if not session.get("enter"):
+    if not session.get("username"):
         return redirect("/landing")
     return render_template("index.html")
 
 @app.route("/landing", methods=["GET", "POST"])
 def landing():
+    if request.method == "POST":
+        username = request.json["username"]
+        if not username.strip():
+            return jsonify({"msg": "please enter a username"}), 406
+        session["username"] = username
+        return jsonify({"msg": "enter"})
+        # return redirect("/")
     return render_template("landing.html", page_id = "landing")

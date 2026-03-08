@@ -4,7 +4,29 @@
 
     <header>
         <div class="sideNote">Another masterpiece</div>
-        <h3><span>Amazing Prizes</span> Waiting for <span>You!</span></h3>
     </header>
+    <main>
+        <div class="notify">
+            <!-- <div>notify example</div> -->
+        </div>
+        <div class="spin_txt">
+            <img src="{{ url_for('static', filename='images/spin_txt.png') }}" alt="ad_text">
+        </div>
+        <div class="wheel">
+            <img src="{{ url_for('static', filename='images/plain_wheel.png') }}" alt="wheel_img">
+        </div>
+        <div class="spin_bg">
+            <img src="{{ url_for('static', filename='images/spin-bg.png') }}" alt="wheel_bg">
+        </div>
+        <form action="/landing" method="post">
+            <h4>Enter Your Username To Play</h4>
+            <input type="text" name="username" autofocus placeholder="Enter username..." autocomplete="off">
+            <button type="submit">GET SPINNING!</button>
+        </form>
+        <a id="enter" href="/">enter</a>
+    </main>
+    <footer>
+        <h3><span>Amazing Prizes</span> Waiting for <span>You!</span></h3>
+    </footer>
 
 {% endblock %}
