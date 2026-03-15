@@ -2,6 +2,20 @@
 
 {% block body %}
 
-
+<header>
+    <div class="sideNote">Another Masterpiece</div>
+    <div><img src="{{ url_for('static', filename='images/spin_txt_2.png') }}" alt="header_txt"></div>
+</header>
+<main>
+    <div class="greet">Username: <span>{{ session.get("username") }}</span></div>
+    <div class="float">HOW TO PLAY</div>
+    <div class="float_right">PRIZES</div>
+    <div class="wheel_img">
+        <div class="press"></div>
+        <img src="{{ url_for('static', filename='images/wheel_2.png') }}" alt="wheel_img">
+    </div>
+    <div class="mount_cont"><img src="{{ url_for('static', filename='images/spin-mount.png') }}" alt="wheel_mount"></div>
+    <div class="status"><i>Collect Your Prize</i></div>
+</main>
 
 {% endblock %}

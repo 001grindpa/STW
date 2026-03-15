@@ -39,4 +39,19 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         })
     }
+    else if (document.body.id === "index") {
+        const body = document.querySelector("body");
+        const press = body.querySelector("main .wheel_img .press");
+        const wheel_img = body.querySelector("main .wheel_img img");
+        
+        let choice = "";
+        const choices = ["Bike", "Home", "Nike", "pen"];
+        
+
+        press.addEventListener("click", () => {
+            wheel_img.classList.add("spin");
+
+            setTimeout(() => wheel_img.classList.remove("spin"), 3000);
+        })
+    }
 })
