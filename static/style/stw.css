@@ -21,6 +21,8 @@ body::-webkit-scrollbar {
     --white-purple: rgb(249, 161, 249);
     --float-font-medium: large;
     --dark-purple: rgb(78, 2, 145);
+    --light-blue: rgb(76, 76, 227);
+    --blue: rgb(60, 60, 221);
 }
 #landing .notify {
     position: fixed;
@@ -130,6 +132,45 @@ body::-webkit-scrollbar {
 }
 
 /* index page styling */
+#index .resultBg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    backdrop-filter: blur(5px);
+    z-index: 5;
+    background-color: rgba(0, 0, 0, 0.258);
+}
+#index .resultBg .result {
+    margin: auto;
+    margin-top: 300px;
+    width: 200px;
+    background: linear-gradient(white, lightgreen);
+    padding: 5px;
+    padding-bottom: 15px;
+    text-align: center;
+    border-radius: 8px;
+}
+#index .resultBg .result img {
+    width: 120px;
+}
+#index .resultBg .result h5 {
+    color: green;
+}
+#index .resultBg .result .again {
+    margin: auto;
+    background-color: var(--light-blue);
+    color: white;
+    width: fit-content;
+    border-radius: 10px;
+    padding: 10px 30px;
+    cursor: pointer;
+    transition: 0.25s;
+}
+#index .resultBg .result .again:hover {
+    background-color: var(--blue);
+}
 #index header div {
     margin: auto;
     width: fit-content;
@@ -138,6 +179,7 @@ body::-webkit-scrollbar {
     width: 500px;
 }
 #index main .float {
+    display: block;
     position: fixed;
     padding: 5px 10px;
     border: 2px solid var(--white-purple);
@@ -149,7 +191,31 @@ body::-webkit-scrollbar {
     left: 20px;
     top: 180px;
     cursor: pointer;
+    opacity: 0.85;
+    transition: 0.25s;
 }
+#index main .float:hover {
+    opacity: 1;
+}
+#index main .htp {
+    position: absolute;
+    width: 200px;
+    z-index: 2;
+    background: white;
+    border-radius: 10px;
+    padding: 10px;
+    left: 30px;
+    top: 35px;
+    line-height: 1.5;
+    font-size: small;
+    display: none;
+}
+#index main #htp {
+    display: none;
+}
+#index main #htp:checked ~ .htp {
+    display: block;
+} 
 #index main .float_right {
     position: fixed;
     padding: 5px 10px;
@@ -162,6 +228,11 @@ body::-webkit-scrollbar {
     top: 180px;
     right: 20px;
     cursor: pointer;
+    opacity: 0.85;
+    transition: 0.25s;
+}
+#index main .float_right:hover {
+    opacity: 1;
 }
 #index main .greet {
     text-align: right;
@@ -181,6 +252,9 @@ body::-webkit-scrollbar {
     }
     #index main .float_right {
         top: 210px;
+    }
+    #index main .htp {
+        left: 50px;
     }
 }
 #index main .wheel_img {

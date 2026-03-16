@@ -43,10 +43,36 @@ document.addEventListener("DOMContentLoaded", () => {
         const body = document.querySelector("body");
         const press = body.querySelector("main .wheel_img .press");
         const wheel_img = body.querySelector("main .wheel_img img");
+        const htpCheck = body.querySelector("main #htp");
+        const htpBtn = body.querySelector("main .float");
+        const htpNot = body.querySelector("main .htp");
+
+        body.addEventListener("click", () => {
+            if (htpCheck.checked == true) {
+                htpCheck.checked = false;
+            }
+        })
+        htpBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+        })
+        htpCheck.addEventListener("click", (e) => {
+            e.stopPropagation();
+        })
+        htpNot.addEventListener("click", (e) => {
+            e.stopPropagation();
+        })
         
         let choice = "";
-        const choices = ["Bike", "Home", "Nike", "pen"];
-        
+        const choices = {
+            1: "Bike", 2: "Free spin", 3: "Nike", 4: "Free spin", 5: "Pen", 6: "Home"
+        }
+        function randint (min, max) {
+            return Math.floor(Math.random() * (max-min + 1)) + min;
+        }
+        let n = randint(1, 4);
+        choice = choices[n];
+        console.log("final choice: " + choice)
+
 
         press.addEventListener("click", () => {
             wheel_img.classList.add("spin");

@@ -7,8 +7,20 @@
     <div><img src="{{ url_for('static', filename='images/spin_txt_2.png') }}" alt="header_txt"></div>
 </header>
 <main>
+    <div class="resultBg">
+        <div class="result">
+            <h5>Congrats you won a !<span></span></h5>
+            <img src="{{ url_for('static', filename='gifs/Bike.gif') }}" alt="bike_gif">
+            <div class="again">Spin Again</div>
+        </div>
+    </div>
     <div class="greet">Username: <span>{{ session.get("username") }}</span></div>
-    <div class="float">HOW TO PLAY</div>
+    <input type="checkbox" id="htp">
+    <label class="float" for="htp">HOW TO PLAY</label>
+    <div class="htp">
+        <div>Click the spin button in the middle of the wheel, the wheel spins and a random price is won.</div>
+        <div>You get to use 3 trials. Good luck!</div>
+    </div>
     <div class="float_right">PRIZES</div>
     <div class="wheel_img">
         <div class="press"></div>
