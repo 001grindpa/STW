@@ -1,6 +1,7 @@
 from flask import Flask, render_template, redirect, request, session, jsonify
 from flask_session import Session
 from datetime import timedelta
+from extra_logic import getPrice
 
 app = Flask(__name__)
 
@@ -28,3 +29,8 @@ def landing():
         return jsonify({"msg": "enter"})
         # return redirect("/")
     return render_template("landing.html", page_id = "landing")
+
+@app.route("/randPrice", methods=["GET", "POST"])
+def randPrice():
+    price = getPrice()
+    return jsonify({"msg": price})

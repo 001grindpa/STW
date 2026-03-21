@@ -132,6 +132,71 @@ body::-webkit-scrollbar {
 }
 
 /* index page styling */
+#index main .burger {
+    position: fixed;
+    z-index: 3;
+    left: 7px;
+    top: 100px;
+    display: grid;
+    width: fit-content;
+    gap: 5px;
+    padding: 5px;
+    border-radius: 5px;
+    transition: 0.25s;
+}
+#index main .burger:hover {
+    background-color: rgba(255, 255, 255, 0.352);
+}
+main .burger div {
+    border-radius: 3px;
+    width: 35px;
+    height: 5px;
+    background-color: green;
+    border: 1px solid white;
+}
+#index main .menu {
+    position: fixed;
+    width: 200px;
+    z-index: 4;
+    left: 0;
+    bottom: 0;
+    top: 0;
+    background: linear-gradient(green, lightgreen);
+    padding: 5px;
+    transform: translateX(-100%);
+    transition: 0.3s;
+}
+#index main .todate {
+    margin-top: 10px;
+    color: yellowgreen;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px;
+}
+#index main .menu .history {
+    margin: auto;
+    margin-top: 40px;
+    background: yellowgreen;
+    height: 300px;
+    padding: 5px;
+    overflow-y: auto;
+}
+#index main .menu .history h4 {
+    margin-bottom: 5px;
+}
+#index main .menu table {
+    padding: 5px;
+    font-size: small;
+    width: 100%;
+}
+main .menu table thead {
+    font-weight: bolder;
+}
+#index main .menu table, #index main .menu table thead, main .menu table thead td, tbody td {
+    border: 1px dashed black;
+    border-collapse: collapse;
+    padding: 5px;
+}
 #index .resultBg {
     position: absolute;
     top: 0;
@@ -141,6 +206,7 @@ body::-webkit-scrollbar {
     backdrop-filter: blur(5px);
     z-index: 5;
     background-color: rgba(0, 0, 0, 0.258);
+    display: none;
 }
 #index .resultBg .result {
     margin: auto;
@@ -152,11 +218,19 @@ body::-webkit-scrollbar {
     text-align: center;
     border-radius: 8px;
 }
+#index .resultBg .result .imgs {
+    display: flex;
+    justify-content: center;
+    overflow-x: auto;
+}
 #index .resultBg .result img {
     width: 120px;
+    display: none;
+    /* height: 120px; */
 }
 #index .resultBg .result h5 {
     color: green;
+    margin-bottom: 10px;
 }
 #index .resultBg .result .again {
     margin: auto;
@@ -167,6 +241,7 @@ body::-webkit-scrollbar {
     padding: 10px 30px;
     cursor: pointer;
     transition: 0.25s;
+    margin-top: 40px;
 }
 #index .resultBg .result .again:hover {
     background-color: var(--blue);
@@ -200,7 +275,7 @@ body::-webkit-scrollbar {
 #index main .htp {
     position: absolute;
     width: 200px;
-    z-index: 2;
+    z-index: 7;
     background: white;
     border-radius: 10px;
     padding: 10px;
@@ -209,6 +284,17 @@ body::-webkit-scrollbar {
     line-height: 1.5;
     font-size: small;
     display: none;
+}
+@media(min-width: 1060px) {
+    #index main .burger {
+        display: none;
+    }
+    #index main .float {
+        left: 250px;
+    }
+    #index main .menu {
+        transform: translateX(0);
+    }
 }
 #index main #htp {
     display: none;
@@ -235,10 +321,18 @@ body::-webkit-scrollbar {
     opacity: 1;
 }
 #index main .greet {
-    text-align: right;
-    margin-right: 15px;
     color: white;
     font-weight: bold;
+    margin-bottom: 10px;
+
+}
+#index main .greet + .won {
+    font-weight: bold;
+}
+#index main .greet + .won + div {
+    font-size: small;
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.596);
 }
 #index main .greet span {
     color: lightgreen;

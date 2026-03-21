@@ -7,14 +7,44 @@
     <div><img src="{{ url_for('static', filename='images/spin_txt_2.png') }}" alt="header_txt"></div>
 </header>
 <main>
+    <div class="burger">
+        <div></div><div></div><div></div>
+    </div>
+    <div class="menu">
+        <div class="todate"></div>
+        <div class="greet">Hello <span>{{ session.get("username") }}</span></div>
+        <div class="won">My collection:</div>
+        <div>your collection will appear here...</div>
+        <div class="history">
+            <h4>Spin History</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <td>Item</td>
+                        <td>Time</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Pen</td>
+                        <td>Sat. March 21</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
     <div class="resultBg">
         <div class="result">
-            <h5>Congrats you won a !<span></span></h5>
-            <img src="{{ url_for('static', filename='gifs/Bike.gif') }}" alt="bike_gif">
+            <h5>Congrats you won a <span class="priceTxt"></span></h5>
+            <div class="imgs">
+                <img src="{{ url_for('static', filename='gifs/Bike.gif') }}" alt="bike_gif">
+                <img src="{{ url_for('static', filename='gifs/Home.gif') }}" alt="Home_img">
+                <img src="{{ url_for('static', filename='gifs/pen.gif') }}" alt="Pen_img">
+                <img src="{{ url_for('static', filename='gifs/Nike AirMax.gif') }}" alt="Home_img">
+            </div>
             <div class="again">Spin Again</div>
         </div>
     </div>
-    <div class="greet">Username: <span>{{ session.get("username") }}</span></div>
     <input type="checkbox" id="htp">
     <label class="float" for="htp">HOW TO PLAY</label>
     <div class="htp">
