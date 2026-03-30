@@ -7,27 +7,29 @@
     <div><img src="{{ url_for('static', filename='images/spin_txt_2.png') }}" alt="header_txt"></div>
 </header>
 <main>
-    <div class="burger">
+    <input type="checkbox" id="check">
+    <label class="burger" for="check">
         <div></div><div></div><div></div>
-    </div>
+    </label>
     <div class="menu">
         <div class="todate"></div>
         <div class="greet">Hello <span>{{ session.get("username") }}</span></div>
         <div class="won">My collection:</div>
         <div>your collection will appear here...</div>
+        <div class="sep"></div>
         <div class="history">
             <h4>Spin History</h4>
             <table>
                 <thead>
                     <tr>
                         <td>Item</td>
-                        <td>Time</td>
+                        <td>Date</td>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="tBody">
                     <tr>
-                        <td>Pen</td>
-                        <td>Sat. March 21</td>
+                        <!-- <td>Pen</td>
+                        <td>Sat. March 21</td> -->
                     </tr>
                 </tbody>
             </table>

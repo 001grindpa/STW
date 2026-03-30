@@ -21,6 +21,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
                 let d = await r.json();
                 console.log(d.msg);
+                if (localStorage.getItem("feed")) {
+                    localStorage.removeItem("feed");
+                }
                 if (d.msg == "please enter a username") {
                     notify.textContent = "Please enter a username";
                     notify.classList.add("slideIn");
@@ -51,23 +54,35 @@ document.addEventListener("DOMContentLoaded", () => {
         const priceImgs = body.querySelectorAll("main .resultBg .result .imgs img");
         const priceTxt = body.querySelector("main .resultBg .priceTxt");
         const spinAgainBtn = body.querySelector("main .resultBg .result .again");
-        const hamburger = body.querySelector("main .burger");
+        const checkBox = body.querySelector("main #check");
         const menu = body.querySelector("main .menu");
         const todate = body.querySelector("main .todate");
+        const tBody = body.querySelector("main .menu table #tBody");
 
         let date = new Date().getDate();
         let month = new Date().toLocaleString("default", {"month": "short"});
-        
+        if (localStorage.getItem("feed")) {
+            let arr = localStorage.getItem("feed");
+            
+            console.log(arr);
+            for (let i of JSON.parse(arr)) {
+                let tr = document.createElement("tr");
+                let td = document.createElement("td");
+                let td2 = document.createElement("td");
+                tr.prepend(td2);
+                tr.prepend(td);
+                td.textContent = i.msg;
+                td2.textContent = i.date;
+                tBody.prepend(tr);
+            }
+        }
+
         todate.textContent = `${date} ${month}`;
 
-        hamburger.addEventListener("click", (e) => {
-            if (menu.style.transform < "translateX(-99%)") {
-                menu.style.transform = "translateX(0)";
-            } else {
-                menu.style.transform = "translateX(-100%)";
-            }
-            e.stopPropagation();
+        checkBox.addEventListener("click", (e) => {
+            e.stopImmediatePropagation();
         })
+
         menu.addEventListener("click", (e) => {
             e.stopPropagation();
         })
@@ -80,8 +95,8 @@ document.addEventListener("DOMContentLoaded", () => {
             if (htpCheck.checked == true) {
                 htpCheck.checked = false;
             }
-            if (menu.style.transform > "translateX(-10%)") {
-                menu.style.transform = "translateX(-100%)";
+            if (checkBox.checked == true) {
+                checkBox.checked = false;
             }
         })
         htpBtn.addEventListener("click", (e) => {
@@ -104,26 +119,47 @@ document.addEventListener("DOMContentLoaded", () => {
             let data = await r.json();
 
             // interact with price items
-            if (data.msg == "Bike") {
+            let priceFeedObj = Object.values(data.priceFeedObj);
+            
+            localStorage.setItem("feed", JSON.stringify(priceFeedObj));
+            console.log(localStorage.getItem("feed"));
+
+            let arr = data.priceFeed;
+            console.log(arr)
+            
+
+            if (data.priceFeed.msg == "Bike") {
                 priceImgs[0].style.display = "block";
-                priceTxt.textContent = "Bike!";
+                priceTxt.textContent = "bike!";
             }
-            else if (data.msg == "Home") {
+            else if (data.priceFeed.msg == "Home") {
                 priceImgs[1].style.display = "block";
-                priceTxt.textContent = "Home!";
+                priceTxt.textContent = "house!";
             }
-            else if (data.msg == "Pen") {
+            else if (data.priceFeed.msg == "Pen") {
                 priceImgs[2].style.display = "block";
-                priceTxt.textContent = "Pen!";
+                priceTxt.textContent = "pen!";
             }
-            else if (data.msg == "Nike") {
+            else if (data.priceFeed.msg == "Nike") {
                 priceImgs[3].style.display = "block";
-                priceTxt.textContent = "Nike Airforce!";
+                priceTxt.textContent = "Nike Airforce shoe!";
+            }
+            else if (data.priceFeed.msg == "Free spin") {
+                // priceImgs[3].style.display = "block";
+                priceTxt.textContent = "Free spin!";
             }
 
             setTimeout(() => {
                 wheel_img.classList.remove("spin");
                 resultBg.style.display = "block";
+                let tr = document.createElement("tr");
+                let td = document.createElement("td");
+                let td2 = document.createElement("td");
+                tr.prepend(td2);
+                tr.prepend(td);
+                td.textContent = arr.msg;
+                td2.textContent = arr.date;
+                tBody.prepend(tr);
             }, 3000);
         })
 

@@ -134,6 +134,7 @@ body::-webkit-scrollbar {
 /* index page styling */
 #index main .burger {
     position: fixed;
+    display: block;
     z-index: 3;
     left: 7px;
     top: 100px;
@@ -166,6 +167,18 @@ main .burger div {
     transform: translateX(-100%);
     transition: 0.3s;
 }
+#index main #check:checked + label + div {
+    transform: translateX(0);
+}
+#index main #check {
+    display: none;
+}
+#index main .menu .sep {
+    height: 1px;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.229);
+    margin-top: 30px;
+}
 #index main .todate {
     margin-top: 10px;
     color: yellowgreen;
@@ -175,7 +188,7 @@ main .burger div {
 }
 #index main .menu .history {
     margin: auto;
-    margin-top: 40px;
+    margin-top: 15px;
     background: yellowgreen;
     height: 300px;
     padding: 5px;
@@ -323,8 +336,9 @@ main .menu table thead {
 #index main .greet {
     color: white;
     font-weight: bold;
-    margin-bottom: 10px;
-
+    margin-bottom: 20px;
+    font-size: x-large;
+    font-style: italic;
 }
 #index main .greet + .won {
     font-weight: bold;
