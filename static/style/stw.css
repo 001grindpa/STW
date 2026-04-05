@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
 *, html, body {
     margin: 0;
     padding: 0;
@@ -210,6 +211,24 @@ main .menu table thead {
     border-collapse: collapse;
     padding: 5px;
 }
+#index main .counter {
+    position: fixed;
+    left: 55%;
+    top: 70px;
+    font-size: 15rem;
+    font-family: Bangers;
+    color: white;
+    z-index: 20;
+    display: none;
+}
+#index main .counter.fade {
+    animation: fade 4s forwards;
+}
+@keyframes fade {
+    to {
+        opacity: 0;
+    }
+}
 #index .resultBg {
     position: absolute;
     top: 0;
@@ -240,6 +259,15 @@ main .menu table thead {
     width: 120px;
     display: none;
     /* height: 120px; */
+}
+#index .resultBg .result .freeSpin {
+    font-family: Bangers;
+    font-size: xx-large;
+    transform: rotate(-20deg);
+    margin-top: 10px;
+    margin-bottom: 20px;
+    display: none;
+    color: green;
 }
 #index .resultBg .result h5 {
     color: green;

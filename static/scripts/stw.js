@@ -52,6 +52,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const resultBg = body.querySelector("main .resultBg");
         const result = body.querySelector("main .resultBg .result");
         const priceImgs = body.querySelectorAll("main .resultBg .result .imgs img");
+        const freeSpin  = body.querySelector("main .resultBg .result .freeSpin");
+        const counter = body.querySelector("main .counter")
         const priceTxt = body.querySelector("main .resultBg .priceTxt");
         const spinAgainBtn = body.querySelector("main .resultBg .result .again");
         const checkBox = body.querySelector("main #check");
@@ -109,11 +111,21 @@ document.addEventListener("DOMContentLoaded", () => {
             e.stopPropagation();
         })
         
-        let totalSpins = 3;
+        let totalSpins = 2;
 
         press.addEventListener("click", async () => {
+            // deactivate spin if max spin is reached
+            if (parseInt(counter.textContent) == totalSpins) {
+                press.style.display = "none";
+            }
+
+            counter.textContent = parseInt(counter.textContent) + 1;
+            counter.style.display = "block";
+            counter.classList.add("fade");
+
             wheel_img.classList.add("spin");
             priceImgs.forEach(el => el.style.display = "none");
+            freeSpin.style.display = "none";
 
             let r = await fetch("/randPrice");
             let data = await r.json();
@@ -145,8 +157,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 priceTxt.textContent = "Nike Airforce shoe!";
             }
             else if (data.priceFeed.msg == "Free spin") {
-                // priceImgs[3].style.display = "block";
+                freeSpin.style.display = "block";
                 priceTxt.textContent = "Free spin!";
+                totalSpins += 1;
             }
 
             setTimeout(() => {
@@ -160,6 +173,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 td.textContent = arr.msg;
                 td2.textContent = arr.date;
                 tBody.prepend(tr);
+                counter.classList.remove("fade");
+                counter.style.display = "none";
             }, 3000);
         })
 
