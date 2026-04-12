@@ -1,67 +1,90 @@
 {% extends "base.html" %}
 
 {% block body %}
+<!--win a particular item twice and get $5, 3 times $10-->
 
-<header>
-    <div class="sideNote">Another Masterpiece</div>
-    <div><img src="{{ url_for('static', filename='images/spin_txt_2.png') }}" alt="header_txt"></div>
-</header>
-<main>
-    <div class="counter">0</div>
-    <input type="checkbox" id="check">
-    <label class="burger" for="check">
-        <div></div><div></div><div></div>
-    </label>
-    <div class="menu">
-        <div class="todate"></div>
-        <div class="greet">Hello <span>{{ session.get("username") }}</span></div>
-        <div class="won">My collection:</div>
-        <div>your collection will appear here...</div>
-        <div class="sep"></div>
-        <div class="history">
-            <h4>Spin History</h4>
-            <table>
-                <thead>
-                    <tr>
-                        <td>Item</td>
-                        <td>Date</td>
-                    </tr>
-                </thead>
-                <tbody id="tBody">
-                    <tr>
-                        <!-- <td>Pen</td>
-                        <td>Sat. March 21</td> -->
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-    <div class="resultBg">
-        <div class="result">
-            <h5>Congrats you won a <span class="priceTxt"></span></h5>
-            <div class="imgs">
-                <img src="{{ url_for('static', filename='gifs/Bike.gif') }}" alt="bike_gif">
-                <img src="{{ url_for('static', filename='gifs/Home.gif') }}" alt="Home_img">
-                <img src="{{ url_for('static', filename='gifs/pen.gif') }}" alt="Pen_img">
-                <img src="{{ url_for('static', filename='gifs/Nike AirMax.gif') }}" alt="Home_img">
-                <div class="freeSpin">Free Spin</div>
+<div class="loader">
+    <img src="{{ url_for('static', filename='gifs/loader2.gif') }}" alt="loader">
+    <div>loading...</div>
+</div>
+<div class="mainCont">
+    <header>
+        <div class="sideNote">Another Masterpiece</div>
+        <div><img src="{{ url_for('static', filename='images/spin_txt_2.png') }}" alt="header_txt"></div>
+    </header>
+    <main>
+        <audio id="tada" src="{{ url_for('static', filename='audios/tada.mp3') }}" type="audio/mpeg"></audio>
+        <audio id="wheel-sound" src="{{ url_for('static', filename='audios/wheel-sound.mp3') }}" type="audio/mpeg"></audio>
+        <div class="counter">0</div>
+        <input type="checkbox" id="check">
+        <label class="burger" for="check">
+            <div></div><div></div><div></div>
+        </label>
+        <div class="menu">
+            <div class="todate"></div>
+            <div class="greet">Hello <span>{{ session.get("username") }}</span></div>
+            <div class="won">My collection:</div>
+            <div>
+                <div>your collection will appear here...</div>
+                <!-- <img src="{{ url_for('static', filename='gifs/Bike.gif') }}" alt="price">
+                <img src="{{ url_for('static', filename='gifs/Nike AirMax.gif') }}" alt="price">
+                <img src="{{ url_for('static', filename='gifs/pen.gif') }}" alt="price"> -->
             </div>
-            <div class="again">Spin Again</div>
+            <div class="sep"></div>
+            <div class="history">
+                <h4>Spin History</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <td>Item</td>
+                            <td>Date</td>
+                        </tr>
+                    </thead>
+                    <tbody id="tBody">
+                        <tr>
+                            <!-- <td>Pen</td>
+                            <td>Sat. March 21</td> -->
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="sep"></div>
+            <div class="audioConfig">
+                <div class="miniHeader">Audio config</div>
+                <input type="checkbox" id="audio">
+                <label for="audio">
+                    <img src="{{ url_for('static', filename='images/no-audio.png') }}" alt="sounds">
+                </label>
+                <div id="audioNotice">click to mute app audio</div>
+            </div>
         </div>
-    </div>
-    <input type="checkbox" id="htp">
-    <label class="float" for="htp">HOW TO PLAY</label>
-    <div class="htp">
-        <div>Click the spin button in the middle of the wheel, the wheel spins and a random price is won.</div>
-        <div>You get to use 3 trials. Good luck!</div>
-    </div>
-    <div class="float_right">PRIZES</div>
-    <div class="wheel_img">
-        <div class="press"></div>
-        <img src="{{ url_for('static', filename='images/wheel_2.png') }}" alt="wheel_img">
-    </div>
-    <div class="mount_cont"><img src="{{ url_for('static', filename='images/spin-mount.png') }}" alt="wheel_mount"></div>
-    <div class="status"><i>Collect Your Prize</i></div>
-</main>
+        <div class="resultBg">
+            <div class="result">
+                <h5>Congrats you won a <span class="priceTxt"></span></h5>
+                <div class="imgs">
+                    <img src="{{ url_for('static', filename='gifs/Bike.gif') }}" alt="bike_gif">
+                    <img src="{{ url_for('static', filename='gifs/Home.gif') }}" alt="Home_img">
+                    <img src="{{ url_for('static', filename='gifs/pen.gif') }}" alt="Pen_img">
+                    <img src="{{ url_for('static', filename='gifs/Nike AirMax.gif') }}" alt="Home_img">
+                    <div class="freeSpin">Free Spin</div>
+                </div>
+                <div class="again">Spin Again</div>
+            </div>
+        </div>
+        <input type="checkbox" id="htp">
+        <label class="float" for="htp">HOW TO PLAY</label>
+        <div class="htp">
+            <div>Click the spin button in the middle of the wheel, the wheel spins and a random price is won.</div>
+            <div>You get to use 3 trials. Good luck!</div>
+        </div>
+        <div class="float_right">PRIZES</div>
+        <div class="wheel_img">
+            <div class="press"></div>
+            <img src="{{ url_for('static', filename='images/wheel_2.png') }}" alt="wheel_img">
+        </div>
+        <div class="mount_cont"><img src="{{ url_for('static', filename='images/spin-mount.png') }}" alt="wheel_mount"></div>
+        <div class="status"><i>Collect Your Prize</i></div>
+    </main>
 
+</div>
 {% endblock %}

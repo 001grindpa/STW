@@ -146,6 +146,18 @@ body::-webkit-scrollbar {
     border-radius: 5px;
     transition: 0.25s;
 }
+#index .loader {
+    position: absolute;
+    top: 300px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+#index .loader img {
+    width: 70px;
+}
+#index .mainCont {
+    display: none;
+}
 #index main .burger:hover {
     background-color: rgba(255, 255, 255, 0.352);
 }
@@ -165,8 +177,26 @@ main .burger div {
     top: 0;
     background: linear-gradient(green, lightgreen);
     padding: 5px;
-    transform: translateX(-100%);
+    /* transform: translateX(-100%); */
     transition: 0.3s;
+    overflow-y: auto;
+}
+/* audio check*/
+#index main #audio {
+    display: none;
+}
+#index main #audio ~ div {
+    font-size: small;
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    width: fit-content;
+    position: fixed;
+    top: 480px;
+    left: 80px;
+    display: none;
+    transition: 0.25s;
+    z-index: 30;
 }
 #index main #check:checked + label + div {
     transform: translateX(0);
@@ -210,6 +240,26 @@ main .menu table thead {
     border: 1px dashed black;
     border-collapse: collapse;
     padding: 5px;
+}
+#index .audioConfig .miniHeader {
+    margin-top: 3px;
+    background-color: blue;
+    color: white;
+    font-size: small;
+    font-weight: bold;
+    width: fit-content;
+    padding: 3px 6px;
+}
+#index .audioConfig img {
+    width: 50px;
+    cursor: pointer;
+    transition: 0.25s;
+}
+#index .audioConfig label:hover + #audioNotice {
+    display: block;
+}
+#index .audioConfig img:hover {
+    width: 53px;
 }
 #index main .counter {
     position: fixed;
@@ -372,9 +422,18 @@ main .menu table thead {
     font-weight: bold;
 }
 #index main .greet + .won + div {
+    display: flex;
+    flex-flow: row wrap;
     font-size: small;
     font-style: italic;
     color: rgba(255, 255, 255, 0.596);
+}
+/* #index main .greet + .won + div div {
+    display: none;
+} */
+#index main .greet + .won + div img {
+    width: 80px;
+    height: 80px;
 }
 #index main .greet span {
     color: lightgreen;

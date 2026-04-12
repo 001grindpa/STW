@@ -34,6 +34,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     setTimeout(() => notifyCont.removeChild(notify), 4000);
                 }
                 if (d.msg == "enter") {
+                    if (localStorage.getItem("muted")) {
+                        localStorage.removeItem("muted");
+                    }
                     enter.click();
                 }
             }
@@ -60,7 +63,62 @@ document.addEventListener("DOMContentLoaded", () => {
         const menu = body.querySelector("main .menu");
         const todate = body.querySelector("main .todate");
         const tBody = body.querySelector("main .menu table #tBody");
+        const loader = body.querySelector(".loader");
+        const mainBody = body.querySelector(".mainCont");
+        const achievedCont = body.querySelector("main .greet + .won + div");
+        const nullCollection = body.querySelector("main .greet + .won + div div");
+        // audio objects
+        const tada = body.querySelector("main #tada");
+        const wheelSound = body.querySelector("main #wheel-sound");
+        const audioCheck = body.querySelector("main #audio");
+        const audioLogo = body.querySelector("main .audioConfig img");
+        const audioNotice = body.querySelector("main #audio ~ div");
+        
+        //test
+        // let achieved = document.createElement("img");
+        // achieved.src = "/static/gifs/Bike.gif";
+        // achievedCont.appendChild(achieved);
 
+        // load page
+        window.addEventListener("load", () => {
+            loader.style.display = "block";
+            mainBody.style.display = "block";
+        })
+
+        // mute and unmute audio
+        audioLogo.addEventListener("click", () => {
+            if (audioCheck.checked == false) {
+                audioLogo.src = "/static/images/audio.png";
+                audioNotice.textContent = "click to unmute app audio";
+                wheelSound.muted = true;
+                tada.muted = true;
+                localStorage.setItem("muted", true);
+            }
+            else {
+                audioLogo.src = "/static/images/no-audio.png";
+                audioNotice.textContent = "click to mute app audio";
+                wheelSound.muted = false;
+                tada.muted = false;
+                localStorage.removeItem("muted");
+            }
+        })
+        // check audio state
+        if (localStorage.getItem("muted")) {
+            audioCheck.checked = true;
+            audioLogo.src = "/static/images/audio.png";
+            audioNotice.textContent = "click to unmute app audio";
+            wheelSound.muted = true;
+            tada.muted = true;
+            localStorage.setItem("muted", true);
+        } else {
+            audioLogo.src = "/static/images/no-audio.png";
+            audioNotice.textContent = "click to mute app audio";
+            wheelSound.muted = false;
+            tada.muted = false;
+            localStorage.removeItem("menu");
+        }
+        
+        // date setup
         let date = new Date().getDate();
         let month = new Date().toLocaleString("default", {"month": "short"});
         if (localStorage.getItem("feed")) {
@@ -111,17 +169,20 @@ document.addEventListener("DOMContentLoaded", () => {
             e.stopPropagation();
         })
         
-        let totalSpins = 2;
+        let totalSpins = 3;
 
         press.addEventListener("click", async () => {
-            // deactivate spin if max spin is reached
-            if (parseInt(counter.textContent) == totalSpins) {
-                press.style.display = "none";
-            }
+            // play wheel audio
+            wheelSound.play();
 
             counter.textContent = parseInt(counter.textContent) + 1;
             counter.style.display = "block";
             counter.classList.add("fade");
+
+            // deactivate spin if max spin is reached
+            if (parseInt(counter.textContent) == totalSpins) {
+                press.style.display = "none";
+            }
 
             wheel_img.classList.add("spin");
             priceImgs.forEach(el => el.style.display = "none");
@@ -137,9 +198,8 @@ document.addEventListener("DOMContentLoaded", () => {
             console.log(localStorage.getItem("feed"));
 
             let arr = data.priceFeed;
-            console.log(arr)
+            console.log(arr);
             
-
             if (data.priceFeed.msg == "Bike") {
                 priceImgs[0].style.display = "block";
                 priceTxt.textContent = "bike!";
@@ -148,11 +208,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 priceImgs[1].style.display = "block";
                 priceTxt.textContent = "house!";
             }
-            else if (data.priceFeed.msg == "Pen") {
+            else if (data.priceFeed.msg == "pen") {
                 priceImgs[2].style.display = "block";
                 priceTxt.textContent = "pen!";
             }
-            else if (data.priceFeed.msg == "Nike") {
+            else if (data.priceFeed.msg == "Nike AirMax") {
                 priceImgs[3].style.display = "block";
                 priceTxt.textContent = "Nike Airforce shoe!";
             }
@@ -160,11 +220,17 @@ document.addEventListener("DOMContentLoaded", () => {
                 freeSpin.style.display = "block";
                 priceTxt.textContent = "Free spin!";
                 totalSpins += 1;
+                if (press.style.display == "none") {
+                    press.style.display = "block";
+                }
             }
 
             setTimeout(() => {
+                tada.play();
                 wheel_img.classList.remove("spin");
                 resultBg.style.display = "block";
+
+                // logic for creating historic data in dom
                 let tr = document.createElement("tr");
                 let td = document.createElement("td");
                 let td2 = document.createElement("td");
@@ -175,7 +241,16 @@ document.addEventListener("DOMContentLoaded", () => {
                 tBody.prepend(tr);
                 counter.classList.remove("fade");
                 counter.style.display = "none";
-            }, 3000);
+
+                // logic for creating achieved price images in dom
+                if (data.priceFeed.msg != "Free spin") {
+                    nullCollection.textContent ="";
+                    let achieved = document.createElement("img");
+                    achieved.src = `/static/gifs/${arr.msg}.gif`;
+                    achievedCont.appendChild(achieved);
+                }
+
+            }, 4000);
         })
 
         resultBg.addEventListener("click", () => {
@@ -184,6 +259,5 @@ document.addEventListener("DOMContentLoaded", () => {
         result.addEventListener("click", (e) => {
             e.stopPropagation();
         })
-
     }
 })

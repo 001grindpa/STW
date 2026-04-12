@@ -2,7 +2,7 @@ from random import choice
 from datetime import datetime
 
 # logic that get's random price
-prices = ["Home", "Bike", "Free spin", "Nike", "Pen", "Free spin"]
+prices = ["Home", "Bike", "Free spin", "Nike AirMax", "pen", "Free spin"]
 def getPrice():
     data = choice(prices)
     return data
