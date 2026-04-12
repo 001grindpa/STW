@@ -177,7 +177,7 @@ main .burger div {
     top: 0;
     background: linear-gradient(green, lightgreen);
     padding: 5px;
-    /* transform: translateX(-100%); */
+    transform: translateX(-100%);
     transition: 0.3s;
     overflow-y: auto;
 }
@@ -187,16 +187,15 @@ main .burger div {
 }
 #index main #audio ~ div {
     font-size: small;
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.783);
     padding: 20px;
     border-radius: 5px;
     width: fit-content;
     position: fixed;
-    top: 480px;
-    left: 80px;
+    top: 460px;
+    right: 0;
     display: none;
     transition: 0.25s;
-    z-index: 30;
 }
 #index main #check:checked + label + div {
     transform: translateX(0);
@@ -354,7 +353,7 @@ main .menu table thead {
     font-weight: bold;
     border-radius: 10px;
     background: linear-gradient(var(--white-purple), var(--dark-purple));
-    left: 20px;
+    right: 20px;
     top: 180px;
     cursor: pointer;
     opacity: 0.85;
@@ -370,7 +369,7 @@ main .menu table thead {
     background: white;
     border-radius: 10px;
     padding: 10px;
-    left: 30px;
+    right: 30px;
     top: 35px;
     line-height: 1.5;
     font-size: small;
@@ -379,9 +378,6 @@ main .menu table thead {
 @media(min-width: 1060px) {
     #index main .burger {
         display: none;
-    }
-    #index main .float {
-        left: 250px;
     }
     #index main .menu {
         transform: translateX(0);
@@ -393,24 +389,6 @@ main .menu table thead {
 #index main #htp:checked ~ .htp {
     display: block;
 } 
-#index main .float_right {
-    position: fixed;
-    padding: 5px 10px;
-    border: 2px solid var(--white-purple);
-    font-size: var(--float-font-medium);
-    color: white;
-    font-weight: bold;
-    border-radius: 10px;
-    background: linear-gradient(var(--white-purple), var(--dark-purple));
-    top: 180px;
-    right: 20px;
-    cursor: pointer;
-    opacity: 0.85;
-    transition: 0.25s;
-}
-#index main .float_right:hover {
-    opacity: 1;
-}
 #index main .greet {
     color: white;
     font-weight: bold;
@@ -427,6 +405,8 @@ main .menu table thead {
     font-size: small;
     font-style: italic;
     color: rgba(255, 255, 255, 0.596);
+    height: 150px;
+    overflow-x: auto;
 }
 /* #index main .greet + .won + div div {
     display: none;
@@ -441,15 +421,6 @@ main .menu table thead {
 @media(min-width: 620px) {
     #index header img {
         width: 680px;
-    }
-    #index main .float {
-        top: 210px;
-    }
-    #index main .float_right {
-        top: 210px;
-    }
-    #index main .htp {
-        left: 50px;
     }
 }
 #index main .wheel_img {

@@ -37,11 +37,17 @@ document.addEventListener("DOMContentLoaded", () => {
                     if (localStorage.getItem("muted")) {
                         localStorage.removeItem("muted");
                     }
+                    if (localStorage.getItem("no-spin")) {
+                        localStorage.removeItem("no-spin");
+                    }
+                    if (localStorage.getItem("counter")) {
+                        localStorage.removeItem("counter");
+                    }
                     enter.click();
                 }
             }
             catch(error) {
-                console.log("error: " + error)
+                console.log("error: " + error);
             }
         })
     }
@@ -56,7 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const result = body.querySelector("main .resultBg .result");
         const priceImgs = body.querySelectorAll("main .resultBg .result .imgs img");
         const freeSpin  = body.querySelector("main .resultBg .result .freeSpin");
-        const counter = body.querySelector("main .counter")
+        const counter = body.querySelector("main .counter");
         const priceTxt = body.querySelector("main .resultBg .priceTxt");
         const spinAgainBtn = body.querySelector("main .resultBg .result .again");
         const checkBox = body.querySelector("main #check");
@@ -73,11 +79,22 @@ document.addEventListener("DOMContentLoaded", () => {
         const audioCheck = body.querySelector("main #audio");
         const audioLogo = body.querySelector("main .audioConfig img");
         const audioNotice = body.querySelector("main #audio ~ div");
+
+        // remove no-spin, counter and midnight sessions after mignight
+        if (Date.now() >= localStorage.getItem("midNight")) {
+            localStorage.removeItem("no-spin");
+            localStorage.removeItem("counter");
+            localStorage.removeItem("midNight");
+        }
+
+        // set a midnight unix time variable
+        let hoursTillMidnight = 24 - new Date().getHours();
+        let inUnix = Date.now() + (hoursTillMidnight * 3600 * 1000);
         
-        //test
-        // let achieved = document.createElement("img");
-        // achieved.src = "/static/gifs/Bike.gif";
-        // achievedCont.appendChild(achieved);
+        if (!localStorage.getItem("midNight")) {
+            localStorage.setItem("midNight", inUnix);
+        }
+        console.log(localStorage.getItem("midNight"));
 
         // load page
         window.addEventListener("load", () => {
@@ -121,10 +138,13 @@ document.addEventListener("DOMContentLoaded", () => {
         // date setup
         let date = new Date().getDate();
         let month = new Date().toLocaleString("default", {"month": "short"});
+        // today's winnings
+        let today = [];
+
         if (localStorage.getItem("feed")) {
             let arr = localStorage.getItem("feed");
             
-            console.log(arr);
+            // console.log(arr);
             for (let i of JSON.parse(arr)) {
                 let tr = document.createElement("tr");
                 let td = document.createElement("td");
@@ -135,7 +155,28 @@ document.addEventListener("DOMContentLoaded", () => {
                 td2.textContent = i.date;
                 tBody.prepend(tr);
             }
+
+            // select today's winnings from history
+            const todate = new Date().getDate()
+            for (let i of JSON.parse(arr)) {
+                if (i.date.split("-")[0] == todate) {
+                    today.push(i.msg);
+                }
+            }
+            console.log(today);
         }
+
+        // automatically adding today's winnings to dom;
+        if (today.length != 0) {
+            nullCollection.textContent = "";
+        }
+        today.forEach(el => {
+            if (el != "Free spin") {
+                let achieved = document.createElement("img");
+                achieved.src = `/static/gifs/${el}.gif`;
+                achievedCont.appendChild(achieved);
+            }
+        })
 
         todate.textContent = `${date} ${month}`;
 
@@ -171,18 +212,30 @@ document.addEventListener("DOMContentLoaded", () => {
         
         let totalSpins = 3;
 
+        // set counter with a session so it does not restart on page refrersh
+        if (localStorage.getItem("counter")) {
+            counter.textContent = localStorage.getItem("counter");
+        }
+
+        if (localStorage.getItem("no-spin")) {
+            press.style.display = "none";
+        }
+
         press.addEventListener("click", async () => {
             // play wheel audio
             wheelSound.play();
 
-            counter.textContent = parseInt(counter.textContent) + 1;
+            localStorage.setItem("counter", parseInt(counter.textContent) + 1);
+            counter.textContent = localStorage.getItem("counter");
             counter.style.display = "block";
             counter.classList.add("fade");
 
             // deactivate spin if max spin is reached
-            if (parseInt(counter.textContent) == totalSpins) {
+            if (parseInt(counter.textContent) >= totalSpins) {
                 press.style.display = "none";
+                localStorage.setItem("no-spin", true);
             }
+            console.log(`counter: ${counter.textContent}`);
 
             wheel_img.classList.add("spin");
             priceImgs.forEach(el => el.style.display = "none");
