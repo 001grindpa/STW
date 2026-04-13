@@ -467,7 +467,7 @@ main .menu table thead {
 #index main .wheel_img {
     width: fit-content;
     margin: auto;
-    margin-top: 70px;
+    margin-top: 150px;
     position: relative;
 }
 
@@ -506,10 +506,10 @@ main .menu table thead {
 }
 #index main .mount_cont img {
     width: 500px;
-    margin-top: -235px;
+    margin-top: -240px;
 }
 #index main .status {
-    margin-top: 30px;
+    margin-top: 100px;
     padding: 5px;
     background-color: var(--dark-purple);
     text-align: center;

@@ -102,7 +102,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // load page
         window.addEventListener("load", () => {
-            loader.style.display = "block";
+            loader.style.display = "none";
             mainBody.style.display = "block";
         })
 
