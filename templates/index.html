@@ -15,6 +15,7 @@
     <main>
         <audio id="tada" src="{{ url_for('static', filename='audios/tada.mp3') }}" type="audio/mpeg"></audio>
         <audio id="wheel-sound" src="{{ url_for('static', filename='audios/wheel-sound.mp3') }}" type="audio/mpeg"></audio>
+        <audio id="app-music" src="{{ url_for('static', filename='audios/mbb-music.mp3') }}" type="audio/mpeg"></audio>
         <div class="counter">0</div>
         <input type="checkbox" id="check">
         <label class="burger" for="check">
@@ -55,8 +56,16 @@
                 <label for="audio">
                     <img src="{{ url_for('static', filename='images/no-audio.png') }}" alt="sounds">
                 </label>
-                <div id="audioNotice">click to mute app audio</div>
+                <div id="audioNotice">click to mute app action sound</div>
             </div>
+            <div>
+                <input type="checkbox" id="switchMusic">
+            <label for="switchMusic" class="music"></label>
+            <span>
+                <img src="{{ url_for('static', filename='images/music.png') }}" alt="music">
+            </span>
+            </div>
+            <div class="sep"></div>
         </div>
         <div class="resultBg">
             <div class="result">

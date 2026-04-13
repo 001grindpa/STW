@@ -79,6 +79,10 @@ document.addEventListener("DOMContentLoaded", () => {
         const audioCheck = body.querySelector("main #audio");
         const audioLogo = body.querySelector("main .audioConfig img");
         const audioNotice = body.querySelector("main #audio ~ div");
+        const appMusic = body.querySelector("main #app-music");
+        const musicCheck = body.querySelector("main .menu #switchMusic");
+        const musicSwitch = body.querySelector("main .menu .music");
+        const musicLogo = body.querySelector("main .menu .music + span img");
 
         // remove no-spin, counter and midnight sessions after mignight
         if (Date.now() >= localStorage.getItem("midNight")) {
@@ -102,18 +106,37 @@ document.addEventListener("DOMContentLoaded", () => {
             mainBody.style.display = "block";
         })
 
+        // mute and unmute music
+        musicSwitch.addEventListener("click", () => {
+            if (musicCheck.checked == false) {
+                appMusic.play();
+                appMusic.volume = 0.4;
+                musicLogo.src = "/static/images/no-music.png"
+            }
+            else {
+                appMusic.pause();
+                appMusic.currentTime = 0;
+                musicLogo.src = "/static/images/music.png"
+            }
+        })
+        // auto start music
+        let autoStart = () => {
+            musicSwitch.click();
+        }
+        // setTimeout(autoStart, 3000);
+
         // mute and unmute audio
         audioLogo.addEventListener("click", () => {
             if (audioCheck.checked == false) {
                 audioLogo.src = "/static/images/audio.png";
-                audioNotice.textContent = "click to unmute app audio";
+                audioNotice.textContent = "click to unmute app action sound";
                 wheelSound.muted = true;
                 tada.muted = true;
                 localStorage.setItem("muted", true);
             }
             else {
                 audioLogo.src = "/static/images/no-audio.png";
-                audioNotice.textContent = "click to mute app audio";
+                audioNotice.textContent = "click to mute app action sound";
                 wheelSound.muted = false;
                 tada.muted = false;
                 localStorage.removeItem("muted");
@@ -123,13 +146,13 @@ document.addEventListener("DOMContentLoaded", () => {
         if (localStorage.getItem("muted")) {
             audioCheck.checked = true;
             audioLogo.src = "/static/images/audio.png";
-            audioNotice.textContent = "click to unmute app audio";
+            audioNotice.textContent = "click to unmute app action sound";
             wheelSound.muted = true;
             tada.muted = true;
             localStorage.setItem("muted", true);
         } else {
             audioLogo.src = "/static/images/no-audio.png";
-            audioNotice.textContent = "click to mute app audio";
+            audioNotice.textContent = "click to mute app action sound";
             wheelSound.muted = false;
             tada.muted = false;
             localStorage.removeItem("menu");

@@ -200,6 +200,47 @@ main .burger div {
 #index main #check:checked + label + div {
     transform: translateX(0);
 }
+#index main .menu .music {
+    height: 25px;
+    width: 50px;
+    background-color: black;
+    margin-top: 10px;
+    border-radius: 20px;
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    transition: 0.25s;
+}
+#index main .menu .music::before {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 70%;
+    background: white;
+    border-radius: 50px;
+    top: 3.5px;
+    left: 5px;
+    transition: 0.25s;
+}
+/* music check */
+#index main .menu #switchMusic {
+    display: none;
+}
+#index main .menu #switchMusic:checked + .music::before {
+    transform: translateX(100%);
+    background: linear-gradient(green, white);
+}
+#index main .menu .music:hover {
+    transform: scale(1.1, 1.1);
+}
+#index main .menu .music + span {
+    display: inline-block;
+    padding-top: 10px;
+}
+#index main .menu .music + span img {
+    width: 25px;
+    height: 25px;
+}
 #index main #check {
     display: none;
 }
@@ -258,7 +299,7 @@ main .menu table thead {
     display: block;
 }
 #index .audioConfig img:hover {
-    width: 53px;
+    transform: scale(1.1, 1.1);
 }
 #index main .counter {
     position: fixed;
