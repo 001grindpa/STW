@@ -15,7 +15,7 @@
     <main>
         <audio id="tada" src="{{ url_for('static', filename='audios/tada.mp3') }}" type="audio/mpeg"></audio>
         <audio id="wheel-sound" src="{{ url_for('static', filename='audios/wheel-sound.mp3') }}" type="audio/mpeg"></audio>
-        <audio id="app-music" src="{{ url_for('static', filename='audios/mbb-music.mp3') }}" type="audio/mpeg"></audio>
+        <audio loop id="app-music" src="{{ url_for('static', filename='audios/golden-beat.mp3') }}" type="audio/mpeg"></audio>
         <div class="counter">0</div>
         <input type="checkbox" id="check">
         <label class="burger" for="check">
@@ -84,7 +84,7 @@
         <label class="float" for="htp">HOW TO PLAY</label>
         <div class="htp">
             <div>Click the spin button in the middle of the wheel, the wheel spins and a random price is won.</div>
-            <div>You get to use 3 trials. Good luck!</div>
+            <div>You get to use 3 trials per day. Good luck!</div>
         </div>
         <div class="wheel_img">
             <div class="press"></div>

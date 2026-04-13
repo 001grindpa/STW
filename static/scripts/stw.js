@@ -106,6 +106,12 @@ document.addEventListener("DOMContentLoaded", () => {
             mainBody.style.display = "block";
         })
 
+        // auto start music
+        // let autoStart = () => {
+        //     musicSwitch.click();
+        // }
+        // setTimeout(autoStart, 6000);
+
         // mute and unmute music
         musicSwitch.addEventListener("click", () => {
             if (musicCheck.checked == false) {
@@ -119,11 +125,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 musicLogo.src = "/static/images/music.png"
             }
         })
-        // auto start music
-        let autoStart = () => {
-            musicSwitch.click();
-        }
-        // setTimeout(autoStart, 3000);
 
         // mute and unmute audio
         audioLogo.addEventListener("click", () => {
